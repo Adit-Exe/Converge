@@ -1,103 +1,118 @@
+'use client';
+
 import Image from "next/image";
+import Link from 'next/link';
+import Lottie from 'lottie-react';
+import blob from '/public/videos/blob.json';
+
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const containerRef = useRef(null);
+  const buttonRef = useRef(null);
+  const pRef = useRef(null);
+  const lottieRef = useRef(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  useGSAP(() => {
+    // Animate all images inside the container with stagger
+    const images = containerRef.current.querySelectorAll('img');
+    gsap.from(images, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power2.out',
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    });
+
+    // Fade-in for button and paragraph
+    gsap.from([buttonRef.current, pRef.current], {
+      y: 30,
+      delay: 2,
+      opacity: 0,
+      duration: 1,
+      ease: 'power2.out',
+      stagger: 1,
+      // scrollTrigger: {
+      //   trigger: pRef.current,
+      //   start: 'top 90%',
+      // },
+    });
+
+    // Fade-in for Lottie background on load
+    gsap.from(lottieRef.current, {
+      opacity: 0,
+      duration: 2,
+      ease: 'power1.out',
+    });
+
+    // Fade-in for H1 tag with id "logo"
+    gsap.from("#logo", {
+      y: -50,
+      duration: 2,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#logo",
+        start: "top 90%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  }, []);
+
+  return (
+    <>
+      {/* Animated Image Container */}
+      <div
+        ref={containerRef}
+        className="relative z-20 w-full max-w-screen-lg sm:h-[700px] h-[500px] mx-auto flex items-center justify-center"
+      >
+        <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-12 left-24 rounded-2xl bg-white p-1" src="/images/dssqr.png" alt="dssqr" width={90} height={90} />
+        <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-12 right-24 rounded-2xl" src="/images/gmnisqr.png" alt="gmnisqr" width={90} height={90} />
+        <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-1/2 left-8 transform -translate-y-3/2 rounded-2xl bg-white p-1" src="/images/gptsqr.png" alt="gptsqr" width={90} height={90} />
+        <img id="logo" className="relative bottom-16  z-10 sm:w-96 w-40"  src="/images/logo.png" alt="grksqr" />
+        <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-1/2 right-8 transform -translate-y-3/2  rounded-2xl" src="/images/grksqr.png" alt="grksqr" width={90} height={90} />
+        <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute sm:bottom-20 bottom-40 left-1/2 transform -translate-x-1/2 rounded-2xl" src="/images/mtasqr.png" alt="mtasqr" width={90} height={90} />
+      </div>
+
+      {/* Button and Paragraph Section */}
+      <div className="sm:w-2xl w-96 flex flex-col items-center justify-self-center-safe absolute z-20">
+        <button ref={buttonRef} className="bg-black text-white px-5 py-3 rounded-4xl mb-10 relative z-10">
+          <Link href="/wspace">Get started</Link>
+        </button>
+
+        <p ref={pRef} className="text-wrap mx-5 p-5 bg-white shadow-2xl rounded-4xl ">
+          Tumhaare sang aawaargi bhi
+          Aawaargi bhi deti hai jaise sukoon
+          Tumhaare sang har ek lamha
+          Har ek lamha yaadein nayi main bunu
+          Tum ho to subah nayi hai
+          Tum ho to shaamein haseen hain
+          Ek duniya sapno si hai
+          Tum ho to is pe yaqeen hai
+          Tum ho to sab achha hai
+          Tum ho to waqt thama hai
+          Tum ho to ye lamha hai
+          Tum ho to iss mein sadaa hai
+        </p>
+      </div>
+
+      {/* Lottie Background */}
+      <div
+        ref={lottieRef}
+        className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden flex items-center justify-center"
+      >
+        <Lottie animationData={blob} loop />
+      </div>
+    </>
   );
 }
