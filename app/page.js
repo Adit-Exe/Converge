@@ -91,7 +91,7 @@ export default function Home() {
         </button>
 
         <p ref={pRef} className="mx-5 p-5 bg-white shadow-2xl rounded-4xl mb-20">
-        <strong>  Why settle for a single answer when you can explore a spectrum of insights? </strong> <br />
+          <strong>  Why settle for a single answer when you can explore a spectrum of insights? </strong> <br />
           Gemini, ChatGPT, Grok, Deepseek, MetaAi all in one place. Step into the future of conversation. Whether you're seeking knowledge, creativity, humor, or deep reasoning, Converge lets you compare how different AI personalities respond to the same prompt. It's like hosting a roundtable of digital thinkers—each with their own style, strengths, and surprises.
         </p>
 
