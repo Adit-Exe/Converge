@@ -79,31 +79,22 @@ export default function Home() {
         <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-12 left-24 rounded-2xl bg-white p-1" src="/images/dssqr.png" alt="dssqr" width={90} height={90} />
         <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-12 right-24 rounded-2xl" src="/images/gmnisqr.png" alt="gmnisqr" width={90} height={90} />
         <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-1/2 left-8 transform -translate-y-3/2 rounded-2xl bg-white p-1" src="/images/gptsqr.png" alt="gptsqr" width={90} height={90} />
-        <img id="logo" className="relative bottom-16  z-10 sm:w-96 w-40"  src="/images/logo.png" alt="grksqr" />
+        <img id="logo" className="relative bottom-16  z-10 sm:w-96 w-40" src="/images/logo.png" alt="grksqr" />
         <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute top-1/2 right-8 transform -translate-y-3/2  rounded-2xl" src="/images/grksqr.png" alt="grksqr" width={90} height={90} />
         <Image className="sm:w-16 sm:h-16 w-10 h-10 absolute sm:bottom-20 bottom-40 left-1/2 transform -translate-x-1/2 rounded-2xl" src="/images/mtasqr.png" alt="mtasqr" width={90} height={90} />
       </div>
 
       {/* Button and Paragraph Section */}
-      <div className="sm:w-2xl w-96 flex flex-col items-center justify-self-center-safe absolute z-20">
+      <div className=" max-w-[700px] flex flex-col items-center justify-center justify-self-center absolute z-20 ">
         <button ref={buttonRef} className="bg-black text-white px-5 py-3 rounded-4xl mb-10 relative z-10">
           <Link href="/wspace">Get started</Link>
         </button>
 
-        <p ref={pRef} className="text-wrap mx-5 p-5 bg-white shadow-2xl rounded-4xl ">
-          Tumhaare sang aawaargi bhi
-          Aawaargi bhi deti hai jaise sukoon
-          Tumhaare sang har ek lamha
-          Har ek lamha yaadein nayi main bunu
-          Tum ho to subah nayi hai
-          Tum ho to shaamein haseen hain
-          Ek duniya sapno si hai
-          Tum ho to is pe yaqeen hai
-          Tum ho to sab achha hai
-          Tum ho to waqt thama hai
-          Tum ho to ye lamha hai
-          Tum ho to iss mein sadaa hai
+        <p ref={pRef} className="mx-5 p-5 bg-white shadow-2xl rounded-4xl mb-20">
+        <strong>  Why settle for a single answer when you can explore a spectrum of insights? </strong> <br />
+          Gemini, ChatGPT, Grok, Deepseek, MetaAi all in one place. Step into the future of conversation. Whether you're seeking knowledge, creativity, humor, or deep reasoning, Converge lets you compare how different AI personalities respond to the same prompt. It's like hosting a roundtable of digital thinkers—each with their own style, strengths, and surprises.
         </p>
+
       </div>
 
       {/* Lottie Background */}
